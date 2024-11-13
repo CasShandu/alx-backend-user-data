@@ -18,17 +18,21 @@ if auth_type == "basic":
 else:
     auth = Auth()
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     return jsonify({"error": "Not found"}), 404
+
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     return jsonify({"error": "Unauthorized"}), 401
 
+
 @app.errorhandler(403)
 def forbidden(error) -> str:
     return jsonify({"error": "Forbidden"}), 403
+
 
 @app.before_request
 def authenticate_user():
@@ -46,8 +50,8 @@ def authenticate_user():
             if user is None:
                 abort(403)
 
+
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
     app.run(host=host, port=port, debug=True)
-
