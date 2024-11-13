@@ -9,9 +9,11 @@ from api.v1.auth.auth import Auth
 from models.user import User
 from typing import TypeVar
 
+
 class BasicAuth(Auth):
     """Basic authentication class.
     """
+
     def extract_base64_authorization_header(
             self,
             authorization_header: str) -> str:
@@ -28,7 +30,7 @@ class BasicAuth(Auth):
     def decode_base64_authorization_header(
             self,
             base64_authorization_header: str,
-            ) -> str:
+    ) -> str:
         """Decodes a base64-encoded authorization header.
         """
         if type(base64_authorization_header) == str:
@@ -54,7 +56,7 @@ class BasicAuth(Auth):
             return (None, None)
         email = decoded_base64_authorization_header.split(":")[0]
         password = "".join(
-          decoded_base64_authorization_header.split(':', 1)[1:])
+            decoded_base64_authorization_header.split(':', 1)[1:])
         return (email, password)
 
     def user_object_from_credentials(self, user_email: str,
