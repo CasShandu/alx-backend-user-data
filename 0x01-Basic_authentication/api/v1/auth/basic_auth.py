@@ -20,7 +20,7 @@ class BasicAuth(Auth):
         """Extracts the Base64 part of the Authorization header
         for a Basic Authentication.
         """
-        if isinstance(authorization_header) == str:
+        if type(authorization_header) == str:
             pattern = r'Basic (?P<token>.+)'
             field_match = re.fullmatch(pattern, authorization_header.strip())
             if field_match is not None:
@@ -33,7 +33,7 @@ class BasicAuth(Auth):
     ) -> str:
         """Decodes a base64-encoded authorization header.
         """
-        if isinstance(base64_authorization_header) == str:
+        if type(base64_authorization_header) == str:
             try:
                 res = base64.b64decode(
                     base64_authorization_header,
@@ -64,8 +64,8 @@ class BasicAuth(Auth):
         """ def user_object_from_credentials.
         """
         if (not user_email or
-                not isinstance(user_email, str) or
-                not user_pwd or not isinstance(user_pwd, str)):
+                type(user_email) != str or
+                not user_pwd or type(user_pwd) != str):
             return
         user = None
         try:
